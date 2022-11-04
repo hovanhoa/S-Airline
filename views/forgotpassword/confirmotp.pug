@@ -1,0 +1,43 @@
+extends layout1
+
+block content
+  section.content
+    #toast
+    .main-form
+      form#form-4.form.form-login(method='POST' action='/forgotpassword/confirmotp/newpassword')
+        div(class='auth-form__header')
+          h3.heading-form XÁC NHẬN MÃ OTP
+        .spacer
+        .form-group
+          label.form-label(for='otpcode') Mã OTP
+          input#otpcode.form-control(name='otpcode' type='text' placeholder='Nhập mã OTP của bạn')
+          span.form-message
+          input#phone(name='phone' type='hidden' value=data.phone)
+          if(data)
+            input#checkStatus(name='checkStatus' type='hidden' value=data.status)
+        button.form-submit XÁC NHẬN
+    script(src='/js/login/index.js')
+    script.
+      var name = $("input[name='checkStatus']").val();
+      if(name == "otp failed") {
+        showOtpErrorToast();
+      }
+      //- ====================
+      document.addEventListener('DOMContentLoaded', function() {
+      // Mong muốn của chúng ta
+      
+      Validator({
+      form: '#form-4',
+      formGroupSelector: '.form-group',
+      errorSelector: '.form-message',
+      rules: [
+      Validator.isRequired('#otpcode'),
+      Validator.isOtp('#otpcode', 6),
+      ],
+      
+      });
+      });
+
+    script(src='https://code.jquery.com/jquery-3.2.1.slim.min.js' integrity='sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN' crossorigin='anonymous')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js' integrity='sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q' crossorigin='anonymous')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js' integrity='sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl' crossorigin='anonymous')

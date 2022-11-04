@@ -1,0 +1,75 @@
+extends ../layout
+
+block content 
+    .booking-form
+          .form-header
+            h1 Thông tin mua vé
+          form(action="/confirm_form", method="post")
+            .modal-body
+                //- input(type="hidden", name="id")
+                .row
+                  .col-sm-6
+                    .form-group
+                      span.form-label
+                            |Tên
+                            span(style='color:red') *
+                      if(session.client)
+                        input.form-control(type='text' placeholder='Tên người sử dụng vé' name="name" value=session.client.name)
+                      else 
+                        input.form-control(type='text' placeholder='Tên người sử dụng vé' name="name")
+                      span#mess.message Trường này không được để trống
+                  .col-sm-6
+                    .form-group
+                      span.form-label 
+                            |Ngày tháng năm sinh
+                            span(style='color:red') *
+                      if(session.client)
+                        input.form-control(type='date' name="birthday" value=moment(session.client.birthday).format('YYYY-MM-DD'))
+                      else 
+                        input.form-control(type='date' name="birthday")
+                      span#mess.message Trường này không được để trống
+                .form-group
+                  span.form-label Email
+                    span(style='color:red') *
+                  if(session.client)
+                    input.form-control(type='email' placeholder='Email' name="email" value=session.client.email)
+                  else
+                    input.form-control(type='email' placeholder='Email' name="email")
+                  span#mess.message Trường này không được để trống
+                .form-group
+                  span.form-label Số điện thoại
+                  if(session.client)
+                    input.form-control(type='tel' placeholder='Số điện thoại để liên hệ' name="phone" value="0"+session.client.phone)
+                  else
+                    input.form-control(type='tel' placeholder='Số điện thoại để liên hệ' name="phone")
+                  span#mess.message Trường này không được để trống
+                  span#mess2.message Cần có ít nhất 9 chữ số.
+                .form-group
+                  span.form-label Địa chỉ
+                  if(session.client)
+                    input.form-control(type='text' placeholder='Địa chỉ người sử dụng vé' name="address" value=session.client.address)
+                  else
+                    input.form-control(type='text' placeholder='Địa chỉ người sử dụng vé' name="address")
+                  span#mess.message Trường này không được để trống
+                .form-group
+                  span.form-label
+                        |CMND/CCCD
+                        span(style='color:red') *
+                  if(session.client)
+                    input.form-control(type='text' placeholder='CMND/CCCD, giấy khai sinh đối với trẻ em' name="id_number" value=session.client.id_number )
+                  else
+                    input.form-control(type='text' placeholder='CMND/CCCD, giấy khai sinh đối với trẻ em' name="id_number" )
+                  span#mess.message Trường này không được để trống
+                  span#mess2.message Cần có ít nhất 9 chữ số.
+            //- .modal-footer
+            #check_form.row 
+              .col-sm-6
+                a(href='/')
+                  button.btn.exit-btn(type='button' data-dismiss='modal') Hủy
+              .col-sm-6
+                button#submit.btn.submit-btn(type='button') XÁC NHẬN
+            #submit_form.row(style="margin:0;display:none;")
+              .form-group
+                span.form-label Xác nhận thông tin thành công. Bấm để tiến hành thanh toán.
+                button.btn.submit-btn(type='submit') THANH TOÁN
+    script(src="/js/confirm_form/index.js")

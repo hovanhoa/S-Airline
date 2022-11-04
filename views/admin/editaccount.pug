@@ -1,0 +1,141 @@
+extends layout 
+
+block content 
+	section.content-header
+		.container-fluid
+			.row.mb-2
+				.col-sm-6
+					h1 Quản lý tài khoản
+				.col-sm-6
+					ol.breadcrumb.float-sm-right
+						li.breadcrumb-item
+							a(href='#') Admin
+						li.breadcrumb-item.active Quản lý tài khoản
+	section.content
+		.container-fluid
+			.row
+				.col-12
+					.card
+						.card-body
+							.row 
+								.col-12 
+									button.btn.btn-primary(type='button' data-toggle='modal' data-target='#addFacultyModal' style="margin-bottom: 5px;")
+										| Thêm mới
+									// Modal
+									#addFacultyModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='addFacultyModal' aria-hidden='true')
+										.modal-dialog(role='document')
+											.modal-content
+												.modal-header
+													h5.modal-title Thêm mới
+													button.close(type='button' data-dismiss='modal' aria-label='Close')
+														span(aria-hidden='true') &times;
+												form(action="/admin/addaccount", method="post")
+													.modal-body
+														.form-group
+															label Số điện thoại
+															input.form-control(type='text' placeholder='Số điện thoại' name='phone')
+														.form-group
+															label Quyền
+															select.form-control(name='type')
+																option(disabled selected value) Quyền Tài khoản
+																option(value = 0) User 
+																option(value = 1) Admin
+																//- each brand in brandList
+																//- 	option(value=brand.id)=brand.name
+														
+													.modal-footer
+														button.btn.btn-secondary(type='button' data-dismiss='modal') Đóng lại
+														button.btn.btn-primary(type='submit' margin-bo) Thêm mới
+							.row
+								.col-12
+									table#tab-faculty.table.table-bordered.table-striped
+										thead
+											tr
+												th.text-center Số điện thoại
+												//- th.text-center Mật khẩu
+												th.text-center Quyền
+												th.text-center Chỉnh sửa
+										tbody
+											each account in accountList
+												tr 
+													td.text-center="0"+account.phone
+													//- td.text-center(type="password")=account.password 
+													td.text-center=account.type=="2"? "Admin" : "User"
+													//- td.text-center=flight.to 
+													//- td.text-center=moment(flight.depart).format('DD/MM/YYYY HH:MM')
+													//- td.text-center=moment(flight.end).format('DD/MM/YYYY HH:MM')
+													//- td.text-center=flight.price +" VND"
+													td.text-center 
+														btn.btn-editAcc.btn.btn-primary.btn-xs(style="margin-right: 5px;", data-phone=account.phone,
+															data-type=account.type) 
+															i.fas.fa-edit
+														btn.btn-deleteAcc.btn.btn-danger.btn-xs(data-phone=account.phone)
+															i.fas.fa-trash 
+											//- tr 
+											//- 	td VN101 
+											//- 	td VietNamAirline 
+											//- 	td Sân bay Đà Nẵng 
+											//- 	td Sân bay Tân Sơn Nhất (SG)
+											//- 	td 07:00 AM 15/10/2021
+											//- 	td 09:00 AM 15/10/2021
+											//- 	td.text-center 
+											//- 		btn.btn-edit.btn.btn-primary.btn-xs(style="margin-right: 5px;") 
+											//- 			i.fas.fa-edit
+											//- 		btn.btn-delete.btn.btn-danger.btn-xs
+											//- 			i.fas.fa-trash 
+
+											//- each faculty in facultyList 
+											//- 	tr 
+											//- 		td=faculty.F_ID
+											//- 		td=faculty.F_NAME
+											//- 		td=faculty.F_EYEAR
+											//- 		td.text-center
+														btn.btn-edit.btn.btn-primary.btn-xs(style="margin-right: 5px;", data-id=faculty.F_ID, data-name=faculty.F_NAME, data-eyear=faculty.F_EYEAR) 
+															i.fas.fa-edit
+														btn.btn-delete.btn.btn-danger.btn-xs(data-id=faculty.F_ID)
+															i.fas.fa-trash 
+
+									#editAccountModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='editAccountModal' aria-hidden='true')
+										.modal-dialog(role='document')
+											.modal-content
+												.modal-header
+													h5.modal-title Chỉnh sửa
+													button.close(type='button' data-dismiss='modal' aria-label='Close')
+														span(aria-hidden='true') &times;
+												form(action="/admin/editAccount", method="post")
+													.modal-body
+														input(type="hidden", name="phone")
+														.form-group
+															label Số điện thoại
+															input.form-control(type='text' placeholder='Số điện thoại' name='phone' disabled)
+														.form-group
+															label Quyền
+															select.form-control(name='type')
+																option(value = 1) User 
+																option(value = 2) Admin
+																//- option(disabled selected value) Hãng chuyến bay
+																//- each brand in brandList
+																//- 	option(value=brand.id)=brand.name
+
+																	//- option(value=brand.id, selected=(brand.id == flight.brand))=brand.id 
+														
+													.modal-footer
+														button.btn.btn-secondary(type='button' data-dismiss='modal') Đóng lại
+														button.btn.btn-primary(type='submit') Cập nhật
+
+														
+
+									#deleteAccountModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='deleteAccountModal' aria-hidden='true')
+										.modal-dialog(role='document')
+											.modal-content.bg-danger
+												.modal-header
+													h5.modal-title Xóa
+													button.close(type='button' data-dismiss='modal' aria-label='Close')
+														span(aria-hidden='true') &times;
+												form(action="/admin/deleteaccount", method="post")
+													.modal-body
+														input(type="hidden", name="phone")
+														p Bạn có chắc chắn muốn xóa tài khoản này không?
+													.modal-footer
+														button.btn.btn-outline-light(type='button' data-dismiss='modal') Đóng lại
+														button.btn.btn-outline-light(type='submit') Xác nhận

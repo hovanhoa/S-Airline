@@ -1,0 +1,42 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(http-equiv='X-UA-Compatible' content='IE=edge')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    title S Airline
+    link(rel="icon" href="/images/logo2.png" type="image/icon type")
+    link(rel='preconnect' href='https://fonts.gstatic.com' crossorigin)
+    link(href='https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap' rel='stylesheet')
+    link(rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css' integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm' crossorigin='anonymous')
+    link(rel='stylesheet' href='/css/style-login.css')
+  body
+    .main-form
+      form#form-1.form.form-login(method='GET' action='/login')
+        div(class='auth-form__header')
+          h3.heading-form CHÚC MỪNG BẠN ĐÃ ĐĂNG KÝ THÀNH CÔNG          
+        .spacer
+        //- .form-group
+        //-   label.form-label(for='fullname') Tên người dùng
+        //-   input#fullname.form-control(name='fullname' type='text' placeholder='Tên đầy đủ của người dùng')
+        //-   span.form-message
+        //- .form-group
+        //-   label.form-label(for='phone') Số điện thoại
+        //-   input#phone.form-control(name='phone' type='text' placeholder='Số điện thoại của bạn')
+        //-   span.form-message
+        //- .form-group
+        //-   label.form-label(for='password') Mật khẩu
+        //-   input#password.form-control(name='password' type='password' placeholder='Mật khẩu của bạn')
+        //-   span.form-message
+        //- .form-group
+        //-   label.form-label(for='password_confirmation') Nhập lại mật khẩu
+        //-   input.form-control(id='password_confirmation' name='password_confirmation' placeholder='Nhập lại mật khẩu' type='password')
+        //-   span.form-message
+        //- span.required-pass Mật khẩu phải có it nhất 8 kí tự
+        button.form-submit TRỞ LẠI ĐĂNG NHẬP
+
+    script(src='/js/login/index.js')
+
+    script(src='https://code.jquery.com/jquery-3.2.1.slim.min.js' integrity='sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN' crossorigin='anonymous')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js' integrity='sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q' crossorigin='anonymous')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js' integrity='sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl' crossorigin='anonymous')

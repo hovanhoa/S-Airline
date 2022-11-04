@@ -1,0 +1,151 @@
+doctype html
+html(lang='en')
+	head
+		// basic
+		meta(charset='utf-8')
+		meta(http-equiv='X-UA-Compatible' content='IE=edge')
+		// mobile metas
+		link(rel="icon" href="/images/logo2.png" type="image/icon type")
+		meta(name='viewport' content='width=device-width, initial-scale=1')
+		meta(name='viewport' content='initial-scale=1, maximum-scale=1')
+		// site metas
+		title S Airlines
+		meta(name='keywords' content='')
+		meta(name='description' content='')
+		meta(name='author' content='')
+		// bootstrap css
+		link(rel='stylesheet' href='css/bootstrap.min.css')
+		// style css
+		link(rel='stylesheet' href='css/style-home_page.css')
+		// Responsive
+		link(rel='stylesheet' href='css/responsive.css')
+		link(rel='stylesheet' href='css/FormStyle.css')
+		link(rel='stylesheet' href='css/style.css')
+		// fevicon
+		link(rel='icon' href='images/fevicon.png' type='image/gif')
+		// Scrollbar Custom CSS
+		link(rel='stylesheet' href='css/jquery.mCustomScrollbar.min.css')
+		// Tweaks for older IEs
+		link(rel='stylesheet' href='https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css')
+		link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css' media='screen')
+		// Google Font: Source Sans Pro
+		link(rel='stylesheet' href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback')
+		// Font Awesome
+		link(rel='stylesheet' href='/plugins/fontawesome-free/css/all.min.css')
+		// DataTables
+		link(rel='stylesheet' href='/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')
+		link(rel='stylesheet' href='/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')
+		link(rel='stylesheet' href='/plugins/datatables-buttons/css/buttons.bootstrap4.min.css')
+		link(href='https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap' rel='stylesheet')
+		link(rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css' integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm' crossorigin='anonymous')
+		//- link(rel='stylesheet' href='/css/style-login.css')
+		link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css')
+		// Theme style
+		// 
+			if lt IE 9
+			script(src='https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js')
+			script(src='https://oss.maxcdn.com/respond/1.4.2/respond.min.js')
+	// body
+	body.main-layout
+		// loader
+		//- .loader_bg
+		//- 	.loader
+		//- 		img(src='images/loading.gif' alt='#')
+		// end loader
+		// header
+		header
+			// header inner
+			.header
+				.container
+					.row
+						.col-xl-3.col-lg-3.col-md-3.col-sm-3.col.logo_section
+							.full
+								.center-desk
+									.logo
+										//- h1 S Airline
+										a(href='./')
+											img(src='images/logo.jpg' alt='#' width='200' height='200')
+						.col-xl-9.col-lg-9.col-md-9.col-sm-9
+							nav.navigation.navbar.navbar-expand-md.navbar-dark
+								button.navbar-toggler(type='button'  data-toggle='collapse' data-target='#navbarsExample04' aria-controls='navbarsExample04' aria-expanded='false' aria-label='Toggle navigation')
+									span.navbar-toggler-icon
+								#navbarsExample04.collapse.navbar-collapse
+									ul.navbar-nav.mr-auto
+										li.nav-item
+											a.nav-link(href='./')  Trang chủ
+										li.nav-item
+											a.nav-link(href='/intro') Giới thiệu
+										li.nav-item
+											a.nav-link(href='/contact') Liên hệ
+										//- li.nav-item
+										//- 	a.nav-link(href='./customer') Tài khoản
+										//- if(session.user)
+										if(session.user && session.user.type == '2')
+											li.nav-item
+												a.nav-link(href='./admin') Admin
+										if(session.user)
+											li.nav-item
+												a.nav-link(href='/logout') Đăng xuất
+										
+									if(session.user)
+										.sign_btn
+											a(href='/customer') #{session.client.name}
+									else 
+										.sign_btn
+											a(href='/login') Đăng nhập
+								
+										
+									
+		// end header inner
+		// end header
+		// banner
+		section.banner_main
+			.container
+				block content
+
+		// end cutomer
+		// footer
+	
+
+		//- footer
+		//- 	.container
+		//- 		.row
+		//- 			.col-md-4
+		//- 			.col-md-8
+		//- 				div(class='cont_call')
+		//- 					h2
+		//- 						strong  © 2021 All Rights Reserved. Design by S Team
+		// end footer
+		// Javascript files
+		script(src='js/jquery.min.js')
+		script(src='js/popper.min.js')
+		script(src='js/bootstrap.bundle.min.js')
+		script(src='js/jquery-3.0.0.min.js')
+		script(src='js/plugin.js')
+		// sidebar
+		script(src='js/jquery.mCustomScrollbar.concat.min.js')
+		script(src='js/custom.js')
+		script(src='https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js')
+		script(src='/plugins/jquery/jquery.min.js')
+		// Bootstrap 4
+		script(src='/plugins/bootstrap/js/bootstrap.bundle.min.js')
+		// DataTables  & Plugins
+		script(src='/plugins/datatables/jquery.dataTables.min.js')
+		script(src='/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')
+		script(src='/plugins/datatables-responsive/js/dataTables.responsive.min.js')
+		script(src='/plugins/datatables-responsive/js/responsive.bootstrap4.min.js')
+		script(src='/plugins/datatables-buttons/js/dataTables.buttons.min.js')
+		script(src='/plugins/datatables-buttons/js/buttons.bootstrap4.min.js')
+		script(src='/plugins/jszip/jszip.min.js')
+		script(src='/plugins/pdfmake/pdfmake.min.js')
+		script(src='/plugins/pdfmake/vfs_fonts.js')
+		script(src='/plugins/datatables-buttons/js/buttons.html5.min.js')
+		script(src='/plugins/datatables-buttons/js/buttons.print.min.js')
+		script(src='/plugins/datatables-buttons/js/buttons.colVis.min.js')
+		script(src='plugins/moment/moment.min.js')
+		// AdminLTE App
+		script(src='/dist/js/adminlte.min.js')
+		script(src='/js/admin/index.js')
+		script(src='/js/customer/index.js')
+		
+		

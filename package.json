@@ -1,0 +1,40 @@
+{
+  "name": "university-mvc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "bcryptjs": "^2.4.3",
+    "express": "^4.17.1",
+    "express-session": "^1.17.2",
+    "jsonwebtoken": "^8.5.1",
+    "moment": "^2.29.1",
+    "mysql": "^2.18.1",
+    "mysql-await": "^2.1.8",
+    "pug": "^3.0.2"
+  },
+  "prettier": {
+    "semi": true,
+    "overrides": [
+      {
+        "files": [
+          "*.js",
+          "*.pug"
+        ],
+        "options": {
+          "tabWidth": 4
+        }
+      }
+    ]
+  },
+  "devDependencies": {
+    "dotenv": "^10.0.0",
+    "nodemon": "^2.0.15"
+  }
+}

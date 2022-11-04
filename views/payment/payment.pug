@@ -1,0 +1,114 @@
+extends ../layout 
+
+block content
+  .container
+    .row
+      .booking-form
+        .form-header
+          h1 Thanh toán
+        .payment-form
+          .container
+            .row
+              .col-sm-6(style='padding:0; margin: 0;')
+                .booking-information-form
+                  .row.booking-information-form-title(style="text-align:justify;")
+                    |  &nbsp&nbsp&nbsp Thông tin khách hàng
+                  .row(style='padding-top: 10px;')
+                    .col-sm-6
+                      .form-group
+                        span.form-label-title TÊN
+                        span.form-label-value #{session.client_seat.name}
+                    .col-sm-6
+                      .form-group
+                        span.form-label-title NGÀY THÁNG NĂM SINH
+                        span.form-label-value #{session.client_seat.birthday}
+                  .row(style='padding-top: 10px;')
+                    .col-sm-6
+                      .form-group
+                        span.form-label-title EMAIL
+                        span.form-label-value #{session.client_seat.email}
+                    .col-sm-6
+                      .form-group
+                        span.form-label-title CCCD/CMND
+                        span.form-label-value #{session.client_seat.id_number}
+                  .flight-ticket-booking-information
+                    .flight-ticket-booking-header
+                      span.flight-ticket-booking-header-title Mã chuyến bay
+                      span.flight-ticket-booking-header-value #{session.cart.items[0].substring(3,9)}
+                    .flight-ticket-booking-body
+                      .row
+                        .col-sm-6.body-row-left(style='padding-top: 5px;')
+                          .body-row-inner
+                            span.flight-ticket-booking-title Từ: 
+                            span.flight-ticket-booking-value #{Flight[0]["from"]}
+                          .body-row-inner
+                            span.flight-ticket-booking-title Lúc: 
+                            span.flight-ticket-booking-value #{ moment(Flight[0]["depart"]).format('DD/MM/YYYY HH:mm')}
+                        .col-sm-6(style='padding-top: 5px;')
+                          .body-row-inner
+                            span.flight-ticket-booking-title Đến: 
+                            span.flight-ticket-booking-value #{Flight[0]["to"]}
+                          .body-row-inner
+                            span.flight-ticket-booking-title Lúc: 
+                            span.flight-ticket-booking-value #{ moment(Flight[0]["end"]).format('DD/MM/YYYY HH:mm')}
+                    .flight-ticket-booking-ticket
+                      .flight-ticket-booking-title(style='padding-left: 0;') Danh sách vé:
+                      .row
+                        each seat in session.cart.items
+                          .col-sm-3
+                            .ticket-seat
+                              span.flight-ticket-booking-value.ticket-seat-id #{seat.substring(0,3)}
+              .col-sm-6(style='padding:0; margin: 0;')
+                .booking-banking-form(style='padding:0;')
+                  .total-price-form
+                    .all-price-row
+                      .total-price-row
+                        span.total-price-item.total-price-header.total-price-column(style="width:120px;") Chuyến bay
+                        span.total-price-quantity.total-price-header.total-price-column(style="width:100px;margin-left:60px;") Số lượng
+                        span.total-price-price.total-price-header.total-price-column(style="text-align:100px;") Giá
+                      .total-price-items
+                        .total-price-row.total-price-items
+                          span.total-price-item.total-price-column #{session.cart.items[0].substring(3,9)}
+                          span.total-price-quantity.total-price-column #{session.cart.items.length}
+                          span.total-price-price.total-price-column(style='text-align: left;') #{session.cart.totalPrice.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ".") +" VND"}
+                    .price-ticket
+                      div(style='margin-bottom:5px;')
+                        span.total-price-title Tổng:
+                        span.total-price-value #{session.cart.totalPrice.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ".") +" VND"}
+                      div(style='margin-top:5px;')
+                        span.total-price-title Thuế:
+                        span.total-price-value 10%
+                    .total-price-ticket
+                      span.total-price-title Tổng cộng:&nbsp
+                      span.total-price-value #{(session.cart.totalPrice * 11/10).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ".") +" VND"}
+                  .banking-form
+                    form(action="/payment", method="post")
+                      .form-group
+                        span.form-label Ngân hàng
+                        if(session.client)
+                          input#bank_name.form-control(name='bank_name' type='text' list='banks' placeholder='Chọn ngân hàng' value=session.client.bank_name)
+                        else
+                          input#bank_name.form-control(name='bank_name' type='text' list='banks' placeholder='Chọn ngân hàng')
+                        datalist#banks
+                          each Bank in ListBank
+                            option(value = Bank.id)=Bank.name
+                        span#mess.message Trường này không được để trống
+                      .form-group
+                        span.form-label Số tài khoản
+                        if(session.client)
+                          input.form-control(type='text' name='bank_number' placeholder='Nhập số tài khoản ngân hàng' value=session.client.bank_number)
+                        else
+                          input.form-control(type='text' name='bank_number' placeholder='Nhập số tài khoản ngân hàng')
+                        span#mess.message Trường này không được để trống
+                        span#mess2.message Cần có ít nhất 10 chữ số.
+                      #check_form.row 
+                        .col-sm-6
+                          a(href='/')
+                            button.btn.exit-btn(type='button' data-dismiss='modal') Hủy
+                        .col-sm-6
+                          button#submit.btn.submit-btn(type='button') XÁC NHẬN
+                      #submit_form.row(style="margin:0;display:none;")
+                        .form-group
+                          span.form-label Đã nhận thông tin ngân hàng. Bấm để tiến hành thanh toán.
+                          button.btn.submit-btn(type='submit') THANH TOÁN
+    script(src="/js/payment/index.js")

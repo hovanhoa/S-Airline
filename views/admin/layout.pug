@@ -1,0 +1,181 @@
+doctype html
+html(lang='en')
+	head
+		meta(charset='utf-8')
+		meta(name='viewport' content='width=device-width, initial-scale=1')
+		title S Airline
+		link(rel="icon" href="/images/logo2.png" type="image/icon type")
+		// Google Font: Source Sans Pro
+		link(rel='stylesheet' href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback')
+		// Font Awesome
+		link(rel='stylesheet' href='/plugins/fontawesome-free/css/all.min.css')
+		// DataTables
+		link(rel='stylesheet' href='/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')
+		link(rel='stylesheet' href='/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')
+		link(rel='stylesheet' href='/plugins/datatables-buttons/css/buttons.bootstrap4.min.css')
+		// Theme style
+		link(rel='stylesheet' href='/dist/css/adminlte.min.css')
+		link(rel='stylesheet' href='/css/style-admin.css')
+	body.hold-transition.sidebar-mini
+		.wrapper
+			// Navbar
+			nav.main-header.navbar.navbar-expand.navbar-white.navbar-light
+				// Left navbar links
+				ul.navbar-nav
+					li.nav-item
+						a.nav-link(data-widget='pushmenu' href='#' role='button')
+							i.fas.fa-bars
+					li.nav-item
+						li.nav-item.d-none.d-sm-inline-block
+						a.nav-link(href='../') Trang chủ
+				ul.navbar-nav.ml-auto
+					li.nav-item
+						li.nav-item.d-none.d-sm-inline-block
+						a.nav-link(href='/logout') Logout
+			// Main Sidebar Container
+			aside.main-sidebar.sidebar-dark-primary.elevation-4
+				// Brand Logo
+				a.brand-link(href='#')
+					img.brand-image.img-circle.elevation-3(src='/images/logo2.png' alt='AdminLTE Logo' style='opacity: .8')
+					span.brand-text.font-weight-light S Airline Mananger
+				// Sidebar
+				.sidebar
+					// Sidebar Menu
+					nav.mt-2
+						ul.nav.nav-pills.nav-sidebar.flex-column(data-widget='treeview' role='menu' data-accordion='false')
+							li.nav-item
+								a.nav-link(href='/admin/report')
+									i.nav-icon.far.fa-file-alt
+									p
+										| Thống kê chuyến bay
+							li.nav-item
+								a.nav-link(href='/admin/editairline')
+									i.nav-icon.fas.fa-plane
+									p
+										| Quản lý chuyến bay
+							li.nav-item
+								a.nav-link(href='/admin/editaccount')
+									i.nav-icon.fas.fa-user
+									p
+										| Quản lý tài khoản
+							li.nav-item
+								a.nav-link(href='/admin/editbrand')
+									i.nav-icon.fas.fa-plane
+									p
+										| Quản lý hãng bay
+							li.nav-item
+								a.nav-link(href='/admin/editairport')
+									i.nav-icon.fas.fa-plane-departure
+									p
+										| Quản lý sân bay
+							li.nav-item
+								a.nav-link(href='/admin/editbank')
+									i.nav-icon.fas.fa-university
+									p
+										| Quản lý ngân hàng
+							
+
+					// /.sidebar-menu
+				// /.sidebar
+			// Content Wrapper. Contains page content
+			.content-wrapper
+				// Content Header (Page header)
+				section.content-header
+					block content
+							//- .col-sm-6
+							//- 	ol.breadcrumb.float-sm-right
+							//- 		li.breadcrumb-item
+							//- 			a(href='#') Admin
+									//- li.breadcrumb-item.active DataTables
+					// /.container-fluid
+				// /.content
+			// /.content-wrapper
+			footer.main-footer
+				.float-right.d-none.d-sm-block
+					//- b Version
+					//- | 3.1.0
+				strong  © 2021 All Rights Reserved. Design by S Team
+					//- a(href='https://adminlte.io') AdminLTE.io
+					//- | .
+				
+			// Control Sidebar
+			aside.control-sidebar.control-sidebar-dark
+				// Control sidebar content goes here
+			// /.control-sidebar
+		// ./wrapper
+		// jQuery
+		script(src='/plugins/jquery/jquery.min.js')
+		// Bootstrap 4
+		script(src='/plugins/bootstrap/js/bootstrap.bundle.min.js')
+		// DataTables  & Plugins
+		script(src='/plugins/datatables/jquery.dataTables.min.js')
+		script(src='/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')
+		script(src='/plugins/datatables-responsive/js/dataTables.responsive.min.js')
+		script(src='/plugins/datatables-responsive/js/responsive.bootstrap4.min.js')
+		script(src='/plugins/datatables-buttons/js/dataTables.buttons.min.js')
+		script(src='/plugins/datatables-buttons/js/buttons.bootstrap4.min.js')
+		script(src='/plugins/jszip/jszip.min.js')
+		script(src='/plugins/pdfmake/pdfmake.min.js')
+		script(src='/plugins/pdfmake/vfs_fonts.js')
+		script(src='/plugins/datatables-buttons/js/buttons.html5.min.js')
+		script(src='/plugins/datatables-buttons/js/buttons.print.min.js')
+		script(src='/plugins/datatables-buttons/js/buttons.colVis.min.js')
+		// AdminLTE App
+		script(src='/dist/js/adminlte.min.js')
+		script(src='/js/admin/index.js')
+
+		// jQuery
+		script(src='plugins/jquery/jquery.min.js')
+		// jQuery UI 1.11.4
+		script(src='plugins/jquery-ui/jquery-ui.min.js')
+		// Resolve conflict in jQuery UI tooltip with Bootstrap tooltip
+		script.
+			$.widget.bridge('uibutton', $.ui.button)
+		// Bootstrap 4
+		script(src='plugins/bootstrap/js/bootstrap.bundle.min.js')
+		// ChartJS
+		script(src='plugins/chart.js/Chart.min.js')
+		// Sparkline
+		script(src='plugins/sparklines/sparkline.js')
+		// JQVMap
+		script(src='plugins/jqvmap/jquery.vmap.min.js')
+		script(src='plugins/jqvmap/maps/jquery.vmap.usa.js')
+		// jQuery Knob Chart
+		script(src='plugins/jquery-knob/jquery.knob.min.js')
+		// daterangepicker
+		script(src='plugins/moment/moment.min.js')
+		script(src='plugins/daterangepicker/daterangepicker.js')
+		// Tempusdominus Bootstrap 4
+		script(src='plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')
+		// Summernote
+		script(src='plugins/summernote/summernote-bs4.min.js')
+		// overlayScrollbars
+		script(src='plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')
+		// AdminLTE App
+		script(src='dist/js/adminlte.js')
+		// AdminLTE for demo purposes
+		script(src='dist/js/demo.js')
+		// AdminLTE dashboard demo (This is only for demo purposes)
+		script(src='dist/js/pages/dashboard.js')
+
+		
+			
+		// AdminLTE for demo purposes
+		//- script(src='/dist/js/demo.js')
+		// Page specific script
+		//- script.
+		//- 	$(function () {
+		//- 	$("#example1").DataTable({
+		//- 	"responsive": true, "lengthChange": false, "autoWidth": false,
+		//- 	"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+		//- 	}).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+		//- 	$('#example2').DataTable({
+		//- 	"paging": true,
+		//- 	"lengthChange": false,
+		//- 	"searching": false,
+		//- 	"ordering": true,
+		//- 	"info": true,
+		//- 	"autoWidth": false,
+		//- 	"responsive": true,
+		//- 	});
+		//- 	});

@@ -1,0 +1,87 @@
+extends layout 
+
+block content
+  section.content
+    #toast
+    .main-form
+      form#form-1.form.form-login(method='POST' action='/register/confirmotp')
+        div(class='auth-form__header')
+          h3.heading-form Đăng ký
+          a.nav-link(href='/login')
+            span(class='auth-form__switch-btn')  Đăng nhập
+        .spacer
+        .form-group
+          label.form-label(for='fullname'  name='name') Tên người dùng
+          if(data)
+            input#fullname.form-control(type='text'  name='name' placeholder='Tên đầy đủ của người dùng' value=data.name)
+          else
+            input#fullname.form-control(type='text'  name='name' placeholder='Tên đầy đủ của người dùng')          
+          span.form-message
+        .form-group
+          label.form-label(for='phone' name="phone") Số điện thoại
+          if(data)
+            input#phone.form-control(name='phone' type='text' placeholder='Số điện thoại của bạn' value=data.phone)
+          else
+            input#phone.form-control(name='phone' type='text' placeholder='Số điện thoại của bạn')
+          span.form-message
+        .form-group
+          label.form-label(for='password' name="password") Mật khẩu
+          //- input#password.form-control(name='password' type='password' placeholder='Mật khẩu của bạn')
+          .input-pass
+            if(data)
+              input#password.form-control(name='password' type='password' placeholder='Mật khẩu của bạn' value=data.password)
+              span.show-btn-eye
+                i.fas.fa-eye
+            else
+              input#password.form-control(name='password' type='password' placeholder='Mật khẩu của bạn')
+              span.show-btn-eye
+                i.fas.fa-eye
+          span.form-message
+          if(data)
+            input#checkStatus(name='checkStatus' type='hidden' value=data.status)
+        .form-group
+          label.form-label(for='password_confirmation') Nhập lại mật khẩu
+          //- input.form-control(id='password_confirmation' name='password_confirmation' placeholder='Nhập lại mật khẩu' type='password')
+          .input-pass
+            if(data)
+              input.form-control(id='password_confirmation' name='password_confirmation' placeholder='Nhập lại mật khẩu' type='password' value=data.password)
+              span.show-btn-eye
+                i.fas.fa-eye.eye-confirm
+            else
+              input.form-control(id='password_confirmation' name='password_confirmation' placeholder='Nhập lại mật khẩu' type='password')
+              span.show-btn-eye
+                i.fas.fa-eye.eye-confirm
+          span.form-message
+        span.required-pass Mật khẩu phải có it nhất 8 kí tự
+        button.form-submit Đăng ký
+    script(src='/js/login/index.js')
+    script.
+
+      var name = $("input[name='checkStatus']").val();
+      if(name == "phone invalid") {
+        showRegisterErrorToast();
+      }
+
+
+      document.addEventListener('DOMContentLoaded', function() {
+      // Mong muốn của chúng ta
+      Validator({
+      form: '#form-1',
+      formGroupSelector: '.form-group',
+      errorSelector: '.form-message',
+      rules: [
+      Validator.isRequired('#fullname', 'Vui lòng nhập tên đầy đủ của bạn'),
+      Validator.isRequired('#phone'),
+      Validator.isPhone('#phone'),
+      Validator.minLength('#password', 8),
+      Validator.isRequired('#password_confirmation'),
+      Validator.isConfirmed('#password_confirmation', function() {
+      return document.querySelector('#form-1 #password').value;
+      }, 'Mật khẩu nhập lại không trùng khớp')
+      ],
+      
+      });
+      });
+    script(src='https://code.jquery.com/jquery-3.2.1.slim.min.js' integrity='sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN' crossorigin='anonymous')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js' integrity='sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q' crossorigin='anonymous')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js' integrity='sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl' crossorigin='anonymous')

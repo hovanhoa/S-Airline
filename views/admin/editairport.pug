@@ -1,0 +1,73 @@
+extends layout 
+
+block content 
+	section.content-header
+		.container-fluid
+			.row.mb-2
+				.col-sm-6
+					h1 Quản lý sân bay
+				.col-sm-6
+					ol.breadcrumb.float-sm-right
+						li.breadcrumb-item
+							a(href='#') Admin
+						li.breadcrumb-item.active Quản lý sân bay
+	section.content
+		.container-fluid
+			.row
+				.col-12
+					.card
+						.card-body
+							.row 
+								.col-12 
+									button.btn.btn-primary(type='button' data-toggle='modal' data-target='#addFacultyModal' style="margin-bottom: 5px;")
+										| Thêm mới
+									// Modal
+									#addFacultyModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='addFacultyModal' aria-hidden='true')
+										.modal-dialog(role='document')
+											.modal-content
+												.modal-header
+													h5.modal-title Thêm mới
+													button.close(type='button' data-dismiss='modal' aria-label='Close')
+														span(aria-hidden='true') &times;
+												form(action="/admin/addairport", method="post")
+													.modal-body
+														.form-group
+															label Tên viết tắt sân bay
+															input.form-control(type='text' placeholder='Tên viết tắt sân bay' name='id')
+														.form-group
+															label Tên thành phố
+															input.form-control(type='text' placeholder='Tên sân bay' name='name')
+														
+													.modal-footer
+														button.btn.btn-secondary(type='button' data-dismiss='modal') Đóng lại
+														button.btn.btn-primary(type='submit' margin-bo) Thêm mới
+							.row
+								.col-12
+									table#tab-faculty.table.table-bordered.table-striped
+										thead
+											tr
+												th.text-center Tên viết tắt sân bay
+												th.text-center Tên thành phố
+												th.text-center Chỉnh sửa
+										tbody
+											each airport in airportList
+												tr 
+													td.text-center=airport.id
+													td.text-center=airport.name 
+													td.text-center 
+														btn.btn-deleteAirport.btn.btn-danger.btn-xs(data-id=airport.id)
+															i.fas.fa-trash 
+									#deleteAirportModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='deleteAirportModal' aria-hidden='true')
+										.modal-dialog(role='document')
+											.modal-content.bg-danger
+												.modal-header
+													h5.modal-title Xóa
+													button.close(type='button' data-dismiss='modal' aria-label='Close')
+														span(aria-hidden='true') &times;
+												form(action="/admin/deleteairport", method="post")
+													.modal-body
+														input(type="hidden", name="id")
+														p Bạn có chắc chắn muốn xóa sân bay này không?
+													.modal-footer
+														button.btn.btn-outline-light(type='button' data-dismiss='modal') Đóng lại
+														button.btn.btn-outline-light(type='submit') Xác nhận

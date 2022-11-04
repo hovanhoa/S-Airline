@@ -1,0 +1,22 @@
+extends ../layout 
+
+block content
+    .booking-form
+        .form-header
+            h1 Xác nhận OTP
+        form
+            .form-group
+                span.form-label
+                    |OTP
+                    span(style='color:red') *
+                input.form-control(type='text' placeholder='Nhập mã OTP' required='')
+                span.af
+            .row
+                .col-sm-6
+                    .form-btn
+                        a(href='./')
+                            button.exit-btn HUỶ
+                .col-sm-6
+                    .form-btn
+                        a(href='./')
+                            button.submit-btn XÁC NHẬN

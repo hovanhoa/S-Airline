@@ -1,0 +1,73 @@
+extends layout 
+
+block content 
+	section.content-header
+		.container-fluid
+			.row.mb-2
+				.col-sm-6
+					h1 Quản lý ngân hàng
+				.col-sm-6
+					ol.breadcrumb.float-sm-right
+						li.breadcrumb-item
+							a(href='#') Admin
+						li.breadcrumb-item.active Quản lý ngân hàng
+	section.content
+		.container-fluid
+			.row
+				.col-12
+					.card
+						.card-body
+							.row 
+								.col-12 
+									button.btn.btn-primary(type='button' data-toggle='modal' data-target='#addFacultyModal' style="margin-bottom: 5px;")
+										| Thêm mới
+									// Modal
+									#addFacultyModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='addFacultyModal' aria-hidden='true')
+										.modal-dialog(role='document')
+											.modal-content
+												.modal-header
+													h5.modal-title Thêm mới
+													button.close(type='button' data-dismiss='modal' aria-label='Close')
+														span(aria-hidden='true') &times;
+												form(action="/admin/addbank", method="post")
+													.modal-body
+														.form-group
+															label Tên viết tắt ngân hàng
+															input.form-control(type='text' placeholder='Tên viết tắt ngân hàng' name='id')
+														.form-group
+															label Tên ngân hàng
+															input.form-control(type='text' placeholder='Tên ngân hàng' name='name')
+														
+													.modal-footer
+														button.btn.btn-secondary(type='button' data-dismiss='modal') Đóng lại
+														button.btn.btn-primary(type='submit' margin-bo) Thêm mới
+							.row
+								.col-12
+									table#tab-faculty.table.table-bordered.table-striped
+										thead
+											tr
+												th.text-center Tên viết tắt ngân hàng
+												th.text-center Tên ngân hàng
+												th.text-center Chỉnh sửa
+										tbody
+											each bank in bankList
+												tr 
+													td.text-center=bank.id
+													td.text-center=bank.name 
+													td.text-center 
+														btn.btn-deleteBank.btn.btn-danger.btn-xs(data-id=bank.id)
+															i.fas.fa-trash 
+									#deleteBankModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='deleteBankModal' aria-hidden='true')
+										.modal-dialog(role='document')
+											.modal-content.bg-danger
+												.modal-header
+													h5.modal-title Xóa
+													button.close(type='button' data-dismiss='modal' aria-label='Close')
+														span(aria-hidden='true') &times;
+												form(action="/admin/deletebank", method="post")
+													.modal-body
+														input(type="hidden", name="id")
+														p Bạn có chắc chắn muốn xóa ngân hàng này không?
+													.modal-footer
+														button.btn.btn-outline-light(type='button' data-dismiss='modal') Đóng lại
+														button.btn.btn-outline-light(type='submit') Xác nhận

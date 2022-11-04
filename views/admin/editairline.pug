@@ -1,0 +1,389 @@
+extends layout 
+
+block content 
+	section.content-header
+		.container-fluid
+			.row.mb-2
+				.col-sm-6
+					h1 Quản lý chuyến bay
+				.col-sm-6
+					ol.breadcrumb.float-sm-right
+						li.breadcrumb-item
+							a(href='#') Admin
+						li.breadcrumb-item.active Quản lý chuyến bay
+	section.content
+		.container-fluid
+			.row
+				.col-12
+					.card
+						.card-body
+							.row 
+								.col-12 
+									button.btn.btn-primary(type='button' data-toggle='modal' data-target='#addFacultyModal' style="margin-bottom: 5px;")
+										| Thêm mới
+									// Modal
+									#addFacultyModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='addFacultyModal' aria-hidden='true')
+										.modal-dialog(role='document')
+											.modal-content
+												.modal-header
+													h5.modal-title Thêm mới
+													button.close(type='button' data-dismiss='modal' aria-label='Close')
+														span(aria-hidden='true') &times;
+												form(action="/admin/add", method="post")
+													.modal-body
+														.form-group
+															label Tên chuyến bay
+															input.form-control(type='text' placeholder='Tên chuyến bay' name='id')
+														.form-group
+															label Hãng chuyến bay
+															select.form-control(name='brand')
+																option(disabled selected value) Hãng chuyến bay
+																each brand in brandList
+																	option(value=brand.id)=brand.name
+														.form-group
+															label Địa điểm khởi hành
+															select.form-control(name='from')
+																option(disabled selected value) Địa điểm khởi hành
+																each ariport in airportList
+																	option(value=ariport.id)=ariport.name
+														.form-group
+															label Địa điểm đến
+															select.form-control(name ='to' )
+																option(disabled selected value) Địa điểm đến
+																each ariport in airportList
+																	option(value=ariport.id)=ariport.name
+														.form-group
+															label Thời gian khởi hành
+															input.form-control(type='datetime-local' name='depart')
+														.form-group
+															label Thời gian đến
+															input.form-control(type='datetime-local' name='end')
+														.form-group
+															label Giá vé
+															input.form-control(type='text' placeholder='Giá vé' name='price')
+													.modal-footer
+														button.btn.btn-secondary(type='button' data-dismiss='modal') Đóng lại
+														button.btn.btn-primary(type='submit' margin-bo) Thêm mới
+							.row
+								.col-12
+									table#tab-faculty.table.table-bordered.table-striped
+										thead
+											tr
+												th.text-center Tên chuyến bay
+												th.text-center Hãng
+												th.text-center Địa điểm khởi hành
+												th.text-center Địa điểm đến
+												th.text-center Thời gian khởi hành 
+												th.text-center Thời gian đến
+												th.text-center Giá vé
+												th.text-center Chỉnh sửa
+										tbody
+											each flight in flightList
+												tr 
+													td.text-center=flight.id
+													td.text-center=flight.brand 
+													td.text-center=flight.from 
+													td.text-center=flight.to 
+													td.text-center=moment(flight.depart).format('DD/MM/YYYY HH:mm')
+													td.text-center=moment(flight.end).format('DD/MM/YYYY HH:mm')
+													td.text-center=flight.price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ".") +" VND"
+													td.text-center 
+														btn.btn-view.btn.btn-success.btn-xs(style="margin-right: 5px;", data-id=flight.id, data-brand=flight.brand,
+															data-from=flight.from, data-to=flight.to, data-depart=flight.depart, data-end=flight.end, data-price=flight.price) 
+															i.fas.fa-eye
+														btn.btn-edit.btn.btn-primary.btn-xs(style="margin-right: 5px;", data-id=flight.id, data-brand=flight.brand,
+															data-from=flight.from, data-to=flight.to, data-depart=flight.depart, data-end=flight.end, data-price=flight.price) 
+															i.fas.fa-edit
+														btn.btn-delete.btn.btn-danger.btn-xs(data-id=flight.id)
+															i.fas.fa-trash 
+											//- tr 
+											//- 	td VN101 
+											//- 	td VietNamAirline 
+											//- 	td Sân bay Đà Nẵng 
+											//- 	td Sân bay Tân Sơn Nhất (SG)
+											//- 	td 07:00 AM 15/10/2021
+											//- 	td 09:00 AM 15/10/2021
+											//- 	td.text-center 
+											//- 		btn.btn-edit.btn.btn-primary.btn-xs(style="margin-right: 5px;") 
+											//- 			i.fas.fa-edit
+											//- 		btn.btn-delete.btn.btn-danger.btn-xs
+											//- 			i.fas.fa-trash 
+
+											//- each faculty in facultyList 
+											//- 	tr 
+											//- 		td=faculty.F_ID
+											//- 		td=faculty.F_NAME
+											//- 		td=faculty.F_EYEAR
+											//- 		td.text-center
+														btn.btn-edit.btn.btn-primary.btn-xs(style="margin-right: 5px;", data-id=faculty.F_ID, data-name=faculty.F_NAME, data-eyear=faculty.F_EYEAR) 
+															i.fas.fa-edit
+														btn.btn-delete.btn.btn-danger.btn-xs(data-id=faculty.F_ID)
+															i.fas.fa-trash 
+
+									#viewFlightModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='viewFlightModal' aria-hidden='true')
+										.modal-dialog(role='document')
+											.search-detail
+												i.fa.fa-times
+												.search-container
+													// <img src="./images/vietnam_airline.png" alt="">
+													.content
+														.info
+															.field
+																span.gray Địa điểm khởi hành
+																span#from(name = "from" value = "from")
+															.field
+																span.gray Địa điểm đến
+																span#to
+															.field
+																span.gray Thời gian khởi hành
+																span#depart
+															.field
+																span.gray Flight No.
+																span#id EK008
+															.field
+																span.gray Giá vé
+																span#price 3,583,000 VND
+														.seat
+															h5 Select a seat
+															.seat-wrapper
+																.seat-row
+																	#A01.seat-column
+																	#B01.seat-column
+																	#C01.seat-column
+																	#D01.seat-column
+																	#E01.seat-column
+																	#F01.seat-column
+																.seat-row
+																	#A02.seat-column
+																	#B02.seat-column
+																	#C02.seat-column
+																	#D02.seat-column
+																	#E02.seat-column
+																	#F02.seat-column
+																.seat-row
+																	#A03.seat-column
+																	#B03.seat-column
+																	#C03.seat-column
+																	#D03.seat-column
+																	#E03.seat-column
+																	#F03.seat-column
+																.seat-row
+																	#A04.seat-column
+																	#B04.seat-column
+																	#C04.seat-column
+																	#D04.seat-column
+																	#E04.seat-column
+																	#F04.seat-column
+																.seat-row
+																	#A05.seat-column
+																	#B05.seat-column
+																	#C05.seat-column
+																	#D05.seat-column
+																	#E05.seat-column
+																	#F05.seat-column
+																.seat-row
+																	#A06.seat-column
+																	#B06.seat-column
+																	#C06.seat-column
+																	#D06.seat-column
+																	#E06.seat-column
+																	#F06.seat-column
+																.seat-row
+																	#A07.seat-column
+																	#B07.seat-column
+																	#C07.seat-column
+																	#D07.seat-column
+																	#E07.seat-column
+																	#F07.seat-column
+																.seat-row
+																	#A08.seat-column
+																	#B08.seat-column
+																	#C08.seat-column
+																	#D08.seat-column
+																	#E08.seat-column
+																	#F08.seat-column
+																.seat-row
+																	#A09.seat-column
+																	#B09.seat-column
+																	#C09.seat-column
+																	#D09.seat-column
+																	#E09.seat-column
+																	#F09.seat-column
+																.seat-row
+																	#A10.seat-column
+																	#B10.seat-column
+																	#C10.seat-column
+																	#D10.seat-column
+																	#E10.seat-column
+																	#F10.seat-column
+																.seat-row
+																	#A11.seat-column
+																	#B11.seat-column
+																	#C11.seat-column
+																	#D11.seat-column
+																	#E11.seat-column
+																	#F11.seat-column
+																.seat-row
+																	#A12.seat-column
+																	#B12.seat-column
+																	#C12.seat-column
+																	#D12.seat-column
+																	#E12.seat-column
+																	#F12.seat-column
+																.seat-row
+																	#A13.seat-column
+																	#B13.seat-column
+																	#C13.seat-column
+																	#D13.seat-column
+																	#E13.seat-column
+																	#F13.seat-column
+																.seat-row
+																	#A14.seat-column
+																	#B14.seat-column
+																	#C14.seat-column
+																	#D14.seat-column
+																	#E14.seat-column
+																	#F14.seat-column
+																.seat-row
+																	#A15.seat-column
+																	#B15.seat-column
+																	#C15.seat-column
+																	#D15.seat-column
+																	#E15.seat-column
+																	#F15.seat-column
+																.seat-row
+																	#A16.seat-column
+																	#B16.seat-column
+																	#C16.seat-column
+																	#D16.seat-column
+																	#E16.seat-column
+																	#F16.seat-column
+																.seat-row
+																	#A17.seat-column
+																	#B17.seat-column
+																	#C17.seat-column
+																	#D17.seat-column
+																	#E17.seat-column
+																	#F17.seat-column
+																.seat-row
+																	#A18.seat-column
+																	#B18.seat-column
+																	#C18.seat-column
+																	#D18.seat-column
+																	#E18.seat-column
+																	#F18.seat-column
+																.seat-row
+																	#A19.seat-column
+																	#B19.seat-column
+																	#C19.seat-column
+																	#D19.seat-column
+																	#E19.seat-column
+																	#F19.seat-column
+																.seat-row
+																	#A20.seat-column
+																	#B20.seat-column
+																	#C20.seat-column
+																	#D20.seat-column
+																	#E20.seat-column
+																	#F20.seat-column
+																.seat-row
+																	#A21.seat-column
+																	#B21.seat-column
+																	#C21.seat-column
+																	#D21.seat-column
+																	#E21.seat-column
+																	#F21.seat-column
+																.seat-row
+																	#A22.seat-column
+																	#B22.seat-column
+																	#C22.seat-column
+																	#D22.seat-column
+																	#E22.seat-column
+																	#F22.seat-column
+																.seat-row
+																	#A23.seat-column
+																	#B23.seat-column
+																	#C23.seat-column
+																	#D23.seat-column
+																	#E23.seat-column
+																	#F23.seat-column
+																.seat-row
+																	#A24.seat-column
+																	#B24.seat-column
+																	#C24.seat-column
+																	#D24.seat-column
+																	#E24.seat-column
+																	#F24.seat-column
+												
+									#editFlightModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='editFlightModal' aria-hidden='true')
+										.modal-dialog(role='document')
+											.modal-content
+												.modal-header
+													h5.modal-title Chỉnh sửa
+													button.close(type='button' data-dismiss='modal' aria-label='Close')
+														span(aria-hidden='true') &times;
+												form(action="/admin/edit", method="post")
+													.modal-body
+														input(type="hidden", name="id")
+														.form-group
+															label Tên chuyến bay
+															input.form-control(type='text' placeholder='Tên chuyến bay' name='id' disabled)
+															
+														.form-group
+															label Hãng chuyến bay
+															select.form-control(name='brand')
+																//- option(disabled selected value) Hãng chuyến bay
+																each brand in brandList
+																	option(value=brand.id)=brand.name
+
+																	//- option(value=brand.id, selected=(brand.id == flight.brand))=brand.id 
+														.form-group
+															label Địa điểm khởi hành
+															select.form-control(name='from')
+																option(disabled selected value) Địa điểm khởi hành
+																each ariport in airportList
+																	option(value=ariport.id)=ariport.name
+														.form-group
+															label Địa điểm đến
+															select.form-control(name ='to' )
+																option(disabled selected value) Địa điểm đến
+																each ariport in airportList
+																	option(value=ariport.id)=ariport.name
+														.form-group
+															label Thời gian khởi hành
+															input.form-control(type='datetime-local' name='depart')
+														.form-group
+															label Thời gian đến
+															input.form-control(type='datetime-local' name='end')
+														.form-group
+															label Giá vé
+															input.form-control(type='text' placeholder='Giá vé' name='price')
+													.modal-footer
+														button.btn.btn-secondary(type='button' data-dismiss='modal') Đóng lại
+														button.btn.btn-primary(type='submit') Cập nhật
+
+														
+
+									#deleteFlightModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='deleteFlightModal' aria-hidden='true')
+										.modal-dialog(role='document')
+											.modal-content.bg-danger
+												.modal-header
+													h5.modal-title Xóa
+													button.close(type='button' data-dismiss='modal' aria-label='Close')
+														span(aria-hidden='true') &times;
+												form(action="/admin/delete", method="post")
+													.modal-body
+														input(type="hidden", name="id")
+														p Bạn có chắc chắn muốn xóa khoa này không?
+													.modal-footer
+														button.btn.btn-outline-light(type='button' data-dismiss='modal') Đóng lại
+														button.btn.btn-outline-light(type='submit') Xác nhận
+							.row 	
+								.col-12 
+									
+
+	script(type='text/javascript').
+		$(function () {
+		$('#datetimepicker1').datetimepicker();
+		});
+		

@@ -1,0 +1,312 @@
+
+/** start search **/
+
+.search-box {
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: #fcf9f2;
+}
+
+.search-box .title {
+    background-color: #166987;
+    padding: 20px;
+    color: #fff;
+}
+
+.search {
+    /* padding-top: 60px;
+    padding-bottom: 60px; */
+    position: relative;
+    top: 20px;
+}
+
+.search form {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    padding: 30px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.25);
+}
+
+.search form .field {
+    width: calc(33.33% - 40px);
+}
+
+.search form .field label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 400;
+}
+
+.search form input {
+    width: 100%;
+    height: 60px;
+    padding-left: 10px;
+    border: 3px solid #0c32b0; 
+    border-radius: 10px;
+    position: relative;
+}
+
+.search form .message {
+    visibility: hidden;
+    color: #ff7a7a;
+    font-size: 12px;
+    font-style: italic;
+    font-weight: 600;
+    padding-top: 5px;
+}
+
+.search form .message.active {
+    visibility: visible;
+}
+
+.search form button {
+    position: absolute;
+    bottom: -80px;
+    left: 0;
+    padding: 12px 35px;
+    border-radius: 60px;
+    background-color: #f6d601;
+    border: 1px solid #f6d601;
+    cursor: pointer;
+}
+
+.search form button:hover {
+    color: #fff;
+}
+
+.search-result {
+    display: none;
+    height: 0;
+}
+
+.search-result.active {
+    display: block;
+    height: auto;
+    margin-top: 130px;
+    margin-bottom: 30px;
+}
+
+.search-result .title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* .search-result .title h4,
+.search-result .title i {
+     color: #fff;
+     font-size: 20px;
+} */
+
+.search-result #close-button {
+    cursor: pointer;
+}
+
+.search-result .list {
+    padding: 30px 50px;
+}
+
+.search-result .item {
+    background-color: #fff;
+    box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.25);
+    margin-bottom: 20px;
+    position: relative;
+    padding: 20px;
+    font-size: 18px;
+}
+
+.search-result .item:last-child {
+    margin-bottom: 0;
+    top: 0;
+}
+
+.search-result .item .item-flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+
+.search-result h3 {
+    color: #fff;
+}
+
+.search-result .item .plane-logo {
+    display: block;
+    width: 40%;
+}
+
+.search-result .item .item-line {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.search-result .item .item-line::before {
+    content: '';
+    display: block;
+    width: 100%;
+    border-top: 3px dashed #eee;
+    position: absolute;
+    z-index: 5;
+}
+
+.search-result .item .item-line img,
+.search-result .item .item-line i {
+    position: relative;
+    z-index: 50;
+}
+
+.search-result .item .item-line img {
+    display: block;
+    width: 30px;
+    height: 30px;
+}
+
+.search-result .item .item-line i {
+    color: #ccc;
+    font-size: 40px;
+}
+
+
+.search-result .item .gray {
+     font-size: 14px;
+    color: #c4c4c4;
+}
+
+.search-result .item-time {
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.search-result .item .price {
+    margin-left: 10px;
+}
+
+.search-result .item-time .gray {
+    display: block;
+}
+
+.search-result .item .view {
+    color: #f18805;
+    cursor: pointer;
+}
+
+.search-detail {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.459);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    /* visibility: hidden */
+}
+
+.search-detail .fa-times {
+     position: absolute;
+     top: 20px;
+     right: 20px;
+     color: #fff;
+     font-size: 40px;
+     cursor: pointer;
+}
+
+.search-detail.active {
+     visibility: visible;
+}
+
+.search-detail .search-container {
+     background-color: #3b63e9;
+     position: relative;
+     border-radius: 40px;
+}
+
+.search-detail .content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.search-detail .content .info {
+    margin-right: 20px;
+}
+
+.search-detail .content .info .field {
+    margin-bottom: 30px;
+}
+
+.search-detail .content .info .field span {
+    display: block;
+}
+
+.search-detail .content .info .field span.gray {
+    color: #c4c4c4;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.search-detail .content .seat {
+    background-color: #0c32b0;
+    padding: 10px;
+}
+
+.search-detail .content .seat h5 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.search-detail .content .seat-row {
+    display: flex;
+}
+
+.search-detail .content .seat-column {
+    width: 15px;
+    height: 12px;
+    border: 2px solid #fff;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    margin: 3px;
+}
+
+.search-detail .content .seat-column:nth-child(3) {
+    margin-right: 18px;
+}
+
+.search-detail .content .seat-column.occupied {
+    background-color: #acacac;
+}
+
+.search-detail .content .seat-column.waiting {
+    background-color: #f18805;
+}
+
+.search-detail .content .seat-column.active {
+    background-color: #f6d601;
+}
+
+.search-detail .bookTicket {
+    /* margin-left: 10px;
+    margin-right: 10px; */
+    display: inline-block;
+    width: 100%;
+    transition: none;
+}
+
+.search-detail .bookTicket button{
+     outline: none;
+     border: 0;
+     width: 100%;
+     background-color: #f6d601;
+     padding-top: 5px;
+     padding-bottom: 5px;
+     border-radius: 10px;
+     transition: none;
+}
+/** end search

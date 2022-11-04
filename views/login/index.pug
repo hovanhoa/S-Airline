@@ -1,0 +1,85 @@
+extends layout1
+
+block content
+  section.content
+
+    #toast
+    .main-form
+      form#form-2.form.form-login(action='/login' method='POST')
+        div(class='auth-form__header')
+          h3.heading-form Đăng nhập
+          a.nav-link(href='/register')
+            span(class='auth-form__switch-btn') Đăng ký
+        .spacer
+        .form-group
+          label.form-label(for='phone' name="phone") Số điện thoại
+          if(data)
+            input#phone.form-control(name='phone' type='text' placeholder='Số điện thoại của bạn' value=data.phone)
+          else
+            input#phone.form-control(name='phone' type='text' placeholder='Số điện thoại của bạn')          
+          span.form-message
+        .form-group
+          label.form-label(for='password' name="password") Mật khẩu
+          //- input#password.form-control(name='password' type='password' placeholder='Mật khẩu của bạn')
+          .input-pass
+            if(data)
+              input#password.form-control(name='password' type='password' placeholder='Mật khẩu của bạn' value=data.password)
+              span.show-btn-eye
+                i.fas.fa-eye
+            else
+              input#password.form-control(name='password' type='password' placeholder='Mật khẩu của bạn')
+              span.show-btn-eye
+                i.fas.fa-eye
+          span.form-message
+          if(data)
+            input#checkStatus(name='checkStatus' type='hidden' value=data.status)
+        div(class='auth-form__header')
+          h3.heading.heading-form
+          span(class='auth-form__switch-btn')
+            a(href='/forgotpassword' class='form__help') Quên mật khẩu
+
+        button.form-submit Đăng nhập
+
+
+    script(src='/js/login/index.js')
+    script.
+      //- --------------------------
+      //- console.log("data status: ");
+      //- console.log(name);
+      //- console.log("data name: ");
+      var name = $("input[name='checkStatus']").val();
+      if(name == "failed password") {
+        showLoginPassErrorToast();
+      }
+      if(name == "failed phone") {
+        showLoginPhoneErrorToast();
+      }
+      if(name == "sign up") {
+        showRegisterSuccessToast();
+      }
+      if(name == "reset") {
+        showResetPassSuccessToast();
+      }
+      //- -------------------------
+      document.addEventListener('DOMContentLoaded', function() {
+      // Mong muốn của chúng ta
+      
+      Validator({
+      form: '#form-2',
+      formGroupSelector: '.form-group',
+      errorSelector: '.form-message',
+      rules: [
+      Validator.isRequired('#phone'),
+      Validator.isPhone('#phone'),
+      Validator.isRequired('#password'),
+      Validator.minLength('#password', 8),
+      ],
+      //onSubmit: function(data) {
+      // Call API
+      //console.log(data);
+      //}
+      });      
+      });
+    script(src='https://code.jquery.com/jquery-3.2.1.slim.min.js' integrity='sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN' crossorigin='anonymous')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js' integrity='sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q' crossorigin='anonymous')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js' integrity='sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl' crossorigin='anonymous')

@@ -1,0 +1,103 @@
+extends layout 
+
+block content 
+	.container-fluid
+		.row.mb-2
+			.col-sm-6
+				h1 Biểu đồ thống kê
+			.col-sm-6
+				ol.breadcrumb.float-sm-right
+					li.breadcrumb-item
+						a(href='#') Admin
+					li.breadcrumb-item.active Thống kê
+		// /.container-fluid
+		// Main content
+	section.content
+		.container-fluid
+			.row
+				.col-md-6
+					// AREA CHART
+					.card.card-primary
+						.card-header
+							h3.card-title Lượt mua vé theo tháng
+							.card-tools
+								button.btn.btn-tool(type='button' data-card-widget='collapse')
+									i.fas.fa-minus
+								button.btn.btn-tool(type='button' data-card-widget='remove')
+									i.fas.fa-times
+						.card-body
+							.chart
+								canvas#areaChart(style='min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;')
+						// /.card-body
+					// /.card
+					// DONUT CHART
+					.card.card-danger
+						.card-header
+							h3.card-title Phần Trăm chuyến theo hãng máy bay
+							.card-tools
+								button.btn.btn-tool(type='button' data-card-widget='collapse')
+									i.fas.fa-minus
+								button.btn.btn-tool(type='button' data-card-widget='remove')
+									i.fas.fa-times
+						.card-body
+							canvas#donutChart(style='min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;')
+						// /.card-body
+					// /.card
+					// PIE CHART
+					.card.card-danger(hidden = 'true')
+						.card-header
+							h3.card-title Số lượng tài khoản đăng kí
+							.card-tools
+								button.btn.btn-tool(type='button' data-card-widget='collapse')
+									i.fas.fa-minus
+								button.btn.btn-tool(type='button' data-card-widget='remove')
+									i.fas.fa-times
+						.card-body
+							canvas#pieChart(style='min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;')
+						// /.card-body
+					// /.card
+				// /.col (LEFT)
+				.col-md-6
+					// LINE CHART
+					.card.card-info
+						.card-header
+							h3.card-title Số lượng tài khoản đăng kí
+							.card-tools
+								button.btn.btn-tool(type='button' data-card-widget='collapse')
+									i.fas.fa-minus
+								button.btn.btn-tool(type='button' data-card-widget='remove')
+									i.fas.fa-times
+						.card-body
+							.chart
+								canvas#lineChart(style='min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;')
+						// /.card-body
+					// /.card
+					// BAR CHART
+					.card.card-success
+						.card-header
+							h3.card-title Doanh thu 
+							.card-tools
+								button.btn.btn-tool(type='button' data-card-widget='collapse')
+									i.fas.fa-minus
+								button.btn.btn-tool(type='button' data-card-widget='remove')
+									i.fas.fa-times
+						.card-body
+							.chart
+								canvas#barChart(style='min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;')
+						// /.card-body
+					// /.card
+					// STACKED BAR CHART
+
+
+	// jQuery
+	script(src='/plugins/jquery/jquery.min.js')
+	// Bootstrap 4
+	script(src='/plugins/bootstrap/js/bootstrap.bundle.min.js')
+	// ChartJS
+	script(src='/plugins/chart.js/Chart.min.js')
+	// AdminLTE App
+	//- script(src='/dist/js/adminlte.min.js')
+	// AdminLTE for demo purposes
+	//- script(src='/dist/js/demo.js')
+	// Page specific script
+	script(src='/js/admin/canvas.js')

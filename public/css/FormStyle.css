@@ -1,0 +1,455 @@
+#booking {
+	font-family: 'Montserrat', sans-serif;
+	background-color: #b8dbe0;
+	background-size: cover;
+	background-position: center;
+}
+
+#booking::before {
+	content: '';
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	top: 0;
+	/* background: azure; */
+}
+
+.booking-form {
+	width: 100%;
+	margin: auto;
+	margin-top: 10px;
+	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	background-color: #fcf9f2;
+}
+
+.booking-form .form-header {
+	background-color: #166987;
+	margin: 0px;
+    color: #fff;
+	text-align: center;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.booking-form .form-header h1 {
+	font-size: 35px;
+	/* text-transform: uppercase; */
+  	font-family: inherit;
+	font-weight: 600;
+	color: #ffffff;
+	margin: 0px;
+}
+
+.booking-form>form {
+	background-color: #fcf9f2;
+	padding: 30px 20px;
+}
+
+.booking-form .form-group {
+	position: relative;
+	margin-bottom: 15px;
+}
+
+.booking-form .form-control {
+	border: none;
+	height: 45px;
+	border-radius: 3px;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	font-weight: 400;
+	color: #101113;
+
+  	font-size: inherit;
+  	font-family: inherit;
+  	background-color: transparent;
+  	border: 1px solid transparent;
+  	border-bottom-color: hsla(185, 100%, 62%, 0.2);
+}
+.booking-form .form-control:hover {
+	border-bottom-color: hsla(0, 0%, 0%, 0.2);
+}
+
+.booking-form .form-control::-webkit-input-placeholder {
+	color: rgba(16, 17, 19, 0.3);
+}
+
+.booking-form .form-control:-ms-input-placeholder {
+	color: rgba(16, 17, 19, 0.3);
+}
+
+.booking-form .form-control::placeholder {
+	color: rgba(16, 17, 19, 0.3);
+}
+
+.booking-form input[type="date"].form-control:invalid {
+	color: rgba(16, 17, 19, 0.3);
+}
+.form-group .message {
+	color: red;
+	font-weight: 600;
+	font-style: italic;
+	font-size: 11px;
+	padding-left: 5px;
+	display: none;
+}
+
+.booking-form select.form-control {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+}
+
+.booking-form select.form-control+.select-arrow {
+	position: absolute;
+	right: 0px;
+	bottom: 6px;
+	width: 32px;
+	line-height: 32px;
+	height: 32px;
+	text-align: center;
+	pointer-events: none;
+	color: #101113;
+	font-size: 14px;
+}
+
+.booking-form select.form-control+.select-arrow:after {
+	content: '\279C';
+	display: block;
+	-webkit-transform: rotate(90deg);
+	transform: rotate(90deg);
+}
+/* h5 {
+	color: #166987
+#0c32b0
+#f6d601
+#f18805
+} */
+
+.booking-form .form-label {
+	color: rgb(0, 0, 0);
+	font-size: 15px;
+	font-weight: 400;
+	margin-bottom: 5px;
+	display: block;
+	text-transform: uppercase;
+}
+
+.booking-form .exit-btn {
+	color: #101113;
+	background-color: #c4c4c4;
+	font-weight: 700;
+	height: 50px;
+	border: none;
+	width: 100%;
+	display: block;
+	border-radius: 3px;
+	text-transform: uppercase;
+}
+.booking-form .exit-btn:active {
+	color: #101113;
+	background-color: #808080;
+}
+.booking-form .exit-btn:hover{
+	color: #f6d601;
+}
+
+.booking-form .submit-btn {
+	color: #101113;
+	background-color: #f6d601;
+	font-weight: 700;
+	height: 50px;
+	border: none;
+	width: 100%;
+	display: block;
+	border-radius: 3px;
+	text-transform: uppercase;
+}
+
+.booking-form .submit-btn:active {
+	color: #101113;
+	background-color: #b69e03;
+}
+
+.booking-form .submit-btn:hover{
+	color: #ffffff;
+}
+
+.form-btn button {
+  z-index: 1;
+  position: relative;
+  font-size: inherit;
+  font-family: inherit;
+  padding: 0.5em 1em;
+  outline: none;
+  overflow: hidden;
+  transition: color 0.4s ease-in-out;
+}
+
+.form-btn button::before {
+  content: '';
+  z-index: -1;
+  position: absolute;
+  top: 100%;
+  left: 100%;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  /* background-color: #3cefff; */
+  background-color: #0c32b0;
+  transform-origin: center;
+  transform: translate3d(-50%, -50%, 0) scale3d(0, 0, 0);
+  transition: transform 0.45s ease-in-out;
+}
+
+.form-btn button:hover {
+  cursor: pointer;
+  color: #161616;
+}
+
+.form-btn button:hover::before {
+  transform: translate3d(-50%, -50%, 0) scale3d(20, 15, 20);
+}
+span.af {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: #0c32b0;
+  transform-origin: bottom right;
+  transform: scaleX(0);
+  transition: transform 0.5s ease;
+}
+
+input.form-control:focus ~ span.af {
+  transform-origin: bottom left;
+  transform: scaleX(1);
+}
+/*==========================================
+	    PAYMENT ONLINE INFORMATION
+==========================================*/
+.booking-information-form-title {
+	text-align: center;
+	font-size: 25px;
+	font-weight: 600;
+	border-radius: 50px;
+	margin-bottom: 20px;
+	font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+	color: white;
+	background-color: #166987;
+}
+.booking-form .form-group .form-label-title {
+	color: rgb(0, 0, 0);
+	font-weight: 600;
+	font-size: 15px;
+	margin-bottom: 5px;
+	display: block;
+	padding-left: 10px;
+}
+.booking-form .form-group .form-label-value {
+	color: rgb(0, 0, 0);
+	font-size: 15px;
+	font-weight: 400;
+	margin-bottom: 5px;
+	display: block;
+	padding-left: 10px;
+	margin-right: 20px;
+	border-bottom: solid black 1px;
+}
+.flight-ticket-booking-information {
+	/* border: solid black 1px; */
+	margin: 10px 0px;
+	padding: 0;
+}
+.flight-ticket-booking-header {
+	color: white;
+	background-color: #166987;
+	border: solid black 1px;
+	padding-left: 20px;
+	margin: 0;
+}
+.flight-ticket-booking-header .flight-ticket-booking-header-title {
+	font-weight: 600;
+	font-size: 15px;
+	margin: auto;
+	display: inline-block;
+	padding-left: 10px;
+}
+.flight-ticket-booking-header .flight-ticket-booking-header-value {
+	font-size: 15px;
+	font-weight: 400;
+	margin: auto;
+	display: inline-block;
+	padding-left: 10px;
+}
+.flight-ticket-booking-body {
+	margin: 0;
+	padding: 5px 20px;
+	border-left: solid black 1px;
+	border-right: solid black 1px;
+}
+.flight-ticket-booking-title {
+	color: rgb(0, 0, 0);
+	font-weight: 600;
+	font-size: 15px;
+	margin-bottom: 5px;
+	padding-left: 10px;
+}
+.flight-ticket-booking-value {
+	color: rgb(0, 0, 0);
+	font-size: 15px;
+	font-weight: 400;
+	margin-bottom: 5px;
+	padding-left: 10px;
+}
+.flight-ticket-booking-ticket {
+	padding: 10px 30px;
+	border-left: solid black 1px;
+	border-right: solid black 1px;
+	border-bottom: solid black 1px;
+}
+.flight-ticket-booking-ticket .ticket-seat {
+	margin: 5px 0px;
+	width: 100%;
+	height: 35px;
+	padding: auto;
+	border: solid black 2px;
+	border-radius: 20px;
+	background-color: #fff;
+}
+.flight-ticket-booking-ticket .ticket-seat .ticket-seat-id {
+	display: block;
+	align-items: center;
+	text-align: center;
+	width: 100%;
+	height: 100%;
+	padding: 0;
+	padding-top: 5px;
+}
+/*==========================================
+			PAYMENT ONLINE FORM
+==========================================*/
+.payment-form {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+}
+.payment-form .booking-information-form {
+	width: 100%;
+	padding: 20px;
+}
+@media (min-width: 800px) {
+  /* CSS that should be displayed if width is equal to or less than 800px goes here */
+  	/* .payment-form .booking-banking-form {
+		border-left: solid black 2px;
+	} */
+	.payment-form .booking-information-form {
+		border-right: solid black 2px;
+	}
+	.flight-ticket-booking-body .body-row-left {
+		border-right: solid black 1px;
+	}
+}
+@media (max-width: 800px) {
+  /* CSS that should be displayed if width is equal to or less than 800px goes here */
+  	.payment-form .booking-banking-form .total-price-form {
+		  border-top: solid black 2px;
+	}
+	.form-btn button {
+		margin-bottom: 5px;
+	}
+}
+.payment-form .booking-banking-form {
+	width: 100%;
+	margin: 0;
+	height: 100%;
+}
+.payment-form .booking-banking-form .total-price-form {
+	width: 100%;
+}
+.payment-form .booking-banking-form .total-price-form .all-price-row{
+	/* height: 50%; */
+	margin: 0px 30px;
+	padding: 10px 10px;
+}
+.payment-form .booking-banking-form .total-price-form .price-ticket{
+	/* height: 50%; */
+	margin: 0px 30px;
+	padding: 10px 30px;
+	border-top: solid black 2px;
+	text-align: right;
+}
+.payment-form .booking-banking-form .total-price-form .price-ticket .total-price-title {
+	font-weight: bold;
+	font-size: 18px;
+	color: black;
+}
+.payment-form .booking-banking-form .total-price-form .price-ticket .total-price-value{
+	padding-left: 10px;
+	color: #333;
+	font-size: 18px;
+}
+.payment-form .booking-banking-form .total-price-form .total-price-ticket{
+	/* height: 50%; */
+	margin: 0px 30px;
+	padding: 10px 30px;
+	border-top: solid black 2px;
+	text-align: right;
+}
+.payment-form .booking-banking-form .banking-form {
+	width: 100%;
+	/* height: 50%; */
+	padding: 20px;
+	border-top: solid black 2px;
+}
+/*==========================================
+		USE FOR TABLE IN TOTAL PRICE
+==========================================*/
+
+.total-price-column {
+	align-items: center;
+	border-top: 1px solid black;
+	margin-right: 17px;
+	margin-left: 17px;
+	margin-top: 7px;
+	padding-bottom: 5px;
+	text-align: center;
+	font-size: 17px;
+}
+.total-price-header {
+	font-weight: bold;
+	color: #333;
+	border: none;
+}
+.total-price-row {
+  	display: flex;
+}
+.total-price-item {
+  	width: 40%;
+}
+.total-price-quantity {
+  	width: 30%;
+}
+.total-price-price {
+  	width: 30%;
+}
+.total-price-items {
+	font-size: 15px;
+	color: #333;
+}
+.total-price-item-title {
+	color: #333;
+	margin-left: 7px;
+	font-size: 10px;
+}
+.payment-form .booking-banking-form .total-price-form .total-price-ticket .total-price-title {
+	font-weight: bold;
+	font-size: 18px;
+	color: black;
+}
+.payment-form .booking-banking-form .total-price-form .total-price-ticket .total-price-value{
+	color: #333;
+	font-size: 18px;
+}
+

@@ -1,0 +1,311 @@
+extends layout 
+
+block content 
+    
+    .search.search-box
+        h4.title TÌM KIẾM CHUYẾN BAY
+
+        form(action='')
+            .field
+                label(for='departure-location') Từ:
+                input#departure-location.checked(name='departureLocation', type='text', list="deps", placeholder='Chọn địa điểm khởi hành')
+                datalist#deps
+                        option(value='Tp. Hồ Chí Minh') Tp. Hồ Chí Minh
+                        option(value='Hà Nội') Hà Nội
+                        option(value='Đà Nẵng') Đà Nẵng
+                        option(value="Phú Quốc") Phú Quốc
+                        option(value="Nha Trang") Nha Trang
+                span.message Trường này không được để trống
+            .field
+                label(for='destination-location') Đến:
+                input#departure-location.checked(name='destinationLocation', type='text', list="dess", placeholder='Chọn địa điểm đến')
+                datalist#dess
+                        option(value='') Chọn địa điểm đến
+                        option(value='Tp. Hồ Chí Minh') Tp. Hồ Chí Minh
+                        option(value='Hà Nội') Hà Nội
+                        option(value='Đà Nẵng') Đà Nẵng
+                        option(value="Phú Quốc") Phú Quốc
+                        option(value="Nha Trang") Nha Trang
+                span.message Trường này không được để trống
+            .field
+                label(for='departure-time') Ngày khởi hành:
+                input#departure-time.checked(type='date')
+                span.message Trường này không được để trống
+            button(type="submit")#search-button.btn.btn-orange Tìm kiếm
+
+    .search-result.search-box
+        .title
+            h4 KẾT QUẢ TÌM KIẾM
+            i#close-button.fa.fa-times
+        #list_result.list
+            .item
+                .item-flex.item-location
+                    span Tp. Hồ Chí Minh
+                    img.plane-logo(src='images/vietnam_airline.png' alt='')
+                    span Hà Nội
+                .item-time
+                    span.gray Khởi hành:
+                    span 8:30 AM
+                .item-flex.item-line 
+                    img(src='images/start_icon.png' alt='')
+                    img(src='images/plane_icon.png' alt='')
+                    img(src='images/end_icon.png' alt='')
+                .item-flex.item-bottom
+                    div
+                        span.gray Giá vé:
+                        span.price 3,583,000 VND
+                    span.view-detail.view Xem chi tiết
+            //- .item
+            //-     .item-flex.item-location
+            //-         span Tp. Hồ Chí Minh
+            //-         img.plane-logo(src='images/vietnam_airline.png' alt='')
+            //-         span Hà Nội
+            //-     .item-time
+            //-         span.gray Khởi hành:
+            //-         span 4:00 PM
+            //-     .item-flex.item-line 
+            //-         img(src='images/start_icon.png' alt='')
+            //-         img(src='images/plane_icon.png' alt='')
+            //-         img(src='images/end_icon.png' alt='')
+            //-     .item-flex.item-bottom
+            //-         div
+            //-             span.gray Giá vé:
+            //-             span.price 3,583,000 VND
+            //-         span.view Xem chi tiết
+            //- .item
+            //-     .item-flex.item-location
+            //-         span Tp. Hồ Chí Minh
+            //-         img.plane-logo(src='images/vietnam_airline.png' alt='')
+            //-         span Hà Nội
+            //-     .item-time
+            //-         span.gray Khởi hành:
+            //-         span 10:00 AM
+            //-     .item-flex.item-line 
+            //-         img(src='images/start_icon.png' alt='')
+            //-         img(src='images/plane_icon.png' alt='')
+            //-         img(src='images/end_icon.png' alt='')
+            //-     .item-flex.item-bottom
+            //-         div
+            //-             span.gray Giá vé:
+            //-             span.price 3,583,000 VND
+            //-         span.view Xem chi tiết
+
+
+            //- each flight in flight_result
+            //-     .item
+            //-         .item-flex.item-location
+            //-             span flight.diadiemkhoihanh
+            //-             img.plane-logo(src='images/vietnam_airline.png' alt='')
+            //-             span flight.diadiemden
+            //-         .item-time
+            //-             span.gray Khởi hành:
+            //-             span 10:00 AM
+            //-         .item-flex.item-line 
+            //-             img(src='images/start_icon.png' alt='')
+            //-             img(src='images/plane_icon.png' alt='')
+            //-             img(src='images/end_icon.png' alt='')
+            //-         .item-flex.item-bottom
+            //-             div
+            //-                 span.gray Giá vé:
+            //-                 span.price 3,583,000 VND
+            //-             span.view Đặt vé
+
+    .search-detail
+        i.fa.fa-times
+        .search-container
+            // <img src="./images/vietnam_airline.png" alt="">
+            .content
+                .info
+                    .field
+                        span.gray Địa điểm khởi hành
+                        #from.span Tp. Hồ Chí Minh
+                    .field
+                        span.gray Địa điểm đến
+                        #to.span Hà Nội
+                    .field
+                        span.gray Thời gian khởi hành
+                        #depart.span 8:30AM
+                    .field
+                        span.gray Flight No.
+                        #id.span EK008
+                    .field
+                        span.gray Giá vé
+                        #price.span 3,583,000 VND
+                    form(action='/add-to-cart' method='post')
+                        input#idSeat(type='text' name='idSeat' hidden)
+                        #bookButton.bookTicket
+                            button(type='submit') Đặt vé 
+                .seat
+                    h5 Select a seat
+                    .seat-wrapper
+                        .seat-row
+                            #A01.seat-column
+                            #B01.seat-column
+                            #C01.seat-column
+                            #D01.seat-column
+                            #E01.seat-column
+                            #F01.seat-column
+                        .seat-row
+                            #A02.seat-column
+                            #B02.seat-column
+                            #C02.seat-column
+                            #D02.seat-column
+                            #E02.seat-column
+                            #F02.seat-column
+                        .seat-row
+                            #A03.seat-column
+                            #B03.seat-column
+                            #C03.seat-column
+                            #D03.seat-column
+                            #E03.seat-column
+                            #F03.seat-column
+                        .seat-row
+                            #A04.seat-column
+                            #B04.seat-column
+                            #C04.seat-column
+                            #D04.seat-column
+                            #E04.seat-column
+                            #F04.seat-column
+                        .seat-row
+                            #A05.seat-column
+                            #B05.seat-column
+                            #C05.seat-column
+                            #D05.seat-column
+                            #E05.seat-column
+                            #F05.seat-column
+                        .seat-row
+                            #A06.seat-column
+                            #B06.seat-column
+                            #C06.seat-column
+                            #D06.seat-column
+                            #E06.seat-column
+                            #F06.seat-column
+                        .seat-row
+                            #A07.seat-column
+                            #B07.seat-column
+                            #C07.seat-column
+                            #D07.seat-column
+                            #E07.seat-column
+                            #F07.seat-column
+                        .seat-row
+                            #A08.seat-column
+                            #B08.seat-column
+                            #C08.seat-column
+                            #D08.seat-column
+                            #E08.seat-column
+                            #F08.seat-column
+                        .seat-row
+                            #A09.seat-column
+                            #B09.seat-column
+                            #C09.seat-column
+                            #D09.seat-column
+                            #E09.seat-column
+                            #F09.seat-column
+                        .seat-row
+                            #A10.seat-column
+                            #B10.seat-column
+                            #C10.seat-column
+                            #D10.seat-column
+                            #E10.seat-column
+                            #F10.seat-column
+                        .seat-row
+                            #A11.seat-column
+                            #B11.seat-column
+                            #C11.seat-column
+                            #D11.seat-column
+                            #E11.seat-column
+                            #F11.seat-column
+                        .seat-row
+                            #A12.seat-column
+                            #B12.seat-column
+                            #C12.seat-column
+                            #D12.seat-column
+                            #E12.seat-column
+                            #F12.seat-column
+                        .seat-row
+                            #A13.seat-column
+                            #B13.seat-column
+                            #C13.seat-column
+                            #D13.seat-column
+                            #E13.seat-column
+                            #F13.seat-column
+                        .seat-row
+                            #A14.seat-column
+                            #B14.seat-column
+                            #C14.seat-column
+                            #D14.seat-column
+                            #E14.seat-column
+                            #F14.seat-column
+                        .seat-row
+                            #A15.seat-column
+                            #B15.seat-column
+                            #C15.seat-column
+                            #D15.seat-column
+                            #E15.seat-column
+                            #F15.seat-column
+                        .seat-row
+                            #A16.seat-column
+                            #B16.seat-column
+                            #C16.seat-column
+                            #D16.seat-column
+                            #E16.seat-column
+                            #F16.seat-column
+                        .seat-row
+                            #A17.seat-column
+                            #B17.seat-column
+                            #C17.seat-column
+                            #D17.seat-column
+                            #E17.seat-column
+                            #F17.seat-column
+                        .seat-row
+                            #A18.seat-column
+                            #B18.seat-column
+                            #C18.seat-column
+                            #D18.seat-column
+                            #E18.seat-column
+                            #F18.seat-column
+                        .seat-row
+                            #A19.seat-column
+                            #B19.seat-column
+                            #C19.seat-column
+                            #D19.seat-column
+                            #E19.seat-column
+                            #F19.seat-column
+                        .seat-row
+                            #A20.seat-column
+                            #B20.seat-column
+                            #C20.seat-column
+                            #D20.seat-column
+                            #E20.seat-column
+                            #F20.seat-column
+                        .seat-row
+                            #A21.seat-column
+                            #B21.seat-column
+                            #C21.seat-column
+                            #D21.seat-column
+                            #E21.seat-column
+                            #F21.seat-column
+                        .seat-row
+                            #A22.seat-column
+                            #B22.seat-column
+                            #C22.seat-column
+                            #D22.seat-column
+                            #E22.seat-column
+                            #F22.seat-column
+                        .seat-row
+                            #A23.seat-column
+                            #B23.seat-column
+                            #C23.seat-column
+                            #D23.seat-column
+                            #E23.seat-column
+                            #F23.seat-column
+                        .seat-row
+                            #A24.seat-column
+                            #B24.seat-column
+                            #C24.seat-column
+                            #D24.seat-column
+                            #E24.seat-column
+                            #F24.seat-column
+                  
+
+    script(src="js/search.js") 
